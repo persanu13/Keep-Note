@@ -1,0 +1,74 @@
+{
+  "notes": [
+    {
+      "title": "altceva",
+      "note": "",
+      "color": "rgb(253, 164, 3)",
+      "fixed": "false",
+      "id": "2e97"
+    },
+    {
+      "title": "andrada",
+      "note": "safdfsa\nsafdsaf",
+      "color": "rgb(94, 0, 138)",
+      "fixed": "true",
+      "id": "5aef"
+    },
+    {
+      "title": "lista cumparaturifdsafd",
+      "note": "sfdsa",
+      "color": "crimson",
+      "fixed": "false",
+      "id": "2100"
+    },
+    {
+      "title": "Internet Caffe",
+      "note": "",
+      "color": "coral",
+      "fixed": "false",
+      "id": "5809"
+    },
+    {
+      "title": "Java Script",
+      "note": "2",
+      "color": "crimson",
+      "fixed": "false",
+      "id": "54c6"
+    },
+    {
+      "title": "C++",
+      "note": "",
+      "color": "rgb(21, 52, 72)",
+      "fixed": "false",
+      "id": "84e8"
+    },
+    {
+      "title": "Minecraft",
+      "note": "",
+      "color": "darkslategrey",
+      "fixed": "true",
+      "id": "a11e"
+    },
+    {
+      "title": "JavaScript",
+      "note": "1\n\n\n2\n\n\n3",
+      "color": "midnightblue",
+      "fixed": "true",
+      "id": "84bd"
+    },
+    {
+      "title": "Microsoft",
+      "note": "",
+      "color": "rgb(21, 52, 72)",
+      "fixed": "true",
+      "id": "e544"
+    },
+    {
+      "title": "Not Today",
+      "note": "",
+      "color": "darkslategrey",
+      "fixed": "true",
+      "id": "daf0"
+    }
+  ]
+}
