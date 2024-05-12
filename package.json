@@ -14,6 +14,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "json-server": "^1.0.0-alpha.23"
   }
 }

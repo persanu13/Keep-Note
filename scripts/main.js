@@ -2,6 +2,10 @@
 // You can npm install packages which help you and import them here
 // Vite allows you to import images and css files if necessary
 
+import { setupServer } from "./server.js";
+
+setupServer();
+
 (async function () {
   //variable
   const COLORS = [
