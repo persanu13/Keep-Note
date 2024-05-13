@@ -1,10 +1,7 @@
 // This is a module, no need for 'use strict'
 // You can npm install packages which help you and import them here
 // Vite allows you to import images and css files if necessary
-
-import { setupServer } from "./server.js";
-
-setupServer();
+import { getNotesData, postNote, deleteNote, updateNote } from "./crud.js";
 
 (async function () {
   //variable
@@ -23,72 +20,6 @@ setupServer();
 
   //functions on init
   displayNoteCards(notesData);
-
-  //fetch function
-  async function getNotesData(url) {
-    let notesData;
-    try {
-      const res = await fetch(url);
-      notesData = await res.json();
-    } catch (error) {
-      console.error("Error:", error);
-      return;
-    }
-    return notesData;
-  }
-
-  async function postNote(noteData, url) {
-    let result;
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(noteData),
-      });
-      result = await response.json();
-    } catch (error) {
-      console.error("Error:", error);
-      return;
-    }
-    return result;
-  }
-
-  async function updateNote(updatedNoteData, url) {
-    let result;
-    try {
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedNoteData),
-      });
-      result = await response.json();
-    } catch (error) {
-      console.error("Error:", error);
-      return;
-    }
-    return result;
-  }
-
-  async function deleteNote(url) {
-    let result;
-    try {
-      const response = await fetch(url, {
-        method: "Delete",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      result = await response.json();
-    } catch (error) {
-      console.error("Error:", error);
-      return;
-    }
-    return result;
-  }
 
   //handleClickBody
   document.querySelector("body").addEventListener("click", handleClickBody);
@@ -144,15 +75,21 @@ setupServer();
     const new_note = await postNote(note_object, apiUrl);
     notesData.unshift(new_note);
     displayNoteCards(notesData);
-    const title = document.querySelector(
-      `[data-note-id="${new_note.id}"] input`
-    );
+    const title = document.querySelector(`[data-note-id="${new_note.id}"] h3`);
     title.focus();
-    title.select();
+    selectText(title);
   }
 
   function getRandomColor() {
     return COLORS[Math.ceil(Math.random() * COLORS.length) - 1];
+  }
+
+  function selectText(element) {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
 
   //handleInputChange
@@ -162,22 +99,17 @@ setupServer();
 
   function handleInputChange(e) {
     const noteCard = e.target.closest("[data-note-id]");
-    if (e.target.closest("textarea")) {
-      e.target.style.height = "auto";
-      e.target.style.height = e.target.scrollHeight + "px";
-    }
-    if (e.target.closest("[data-color-picker]")) {
-      noteCard.style.backgroundColor = e.target.closest(
-        "[data-color-picker]"
-      ).value;
+    const colorPicker = e.target.closest("[data-color-picker]");
+    if (colorPicker) {
+      noteCard.style.backgroundColor = colorPicker.value;
     }
     updateNoteCard(noteCard);
   }
 
   async function updateNoteCard(noteCard, title, note, color, fixed) {
     const id = noteCard.dataset.noteId;
-    if (!title) title = noteCard.querySelector("input").value;
-    if (!note) note = noteCard.querySelector("textarea").value;
+    if (!title) title = noteCard.querySelector("h3").innerText;
+    if (!note) note = noteCard.querySelector("p").innerText;
     if (!color) color = noteCard.style.backgroundColor;
     if (!fixed) fixed = noteCard.dataset.fixed;
     const data = { title: title, note: note, color: color, fixed: fixed };
@@ -296,17 +228,14 @@ setupServer();
     noteCard.dataset.fixed = noteData.fixed;
     noteCard.classList.add("note-card");
     noteCard.style.backgroundColor = noteData.color;
-    const title = document.createElement("input");
-    title.type = "text";
-    title.value = noteData.title;
-    title.placeholder = "Title";
-    title.maxLength = 30;
-    const note = document.createElement("textarea");
-    note.value = noteData.note;
-    note.placeholder = "Note";
-    setTimeout(function () {
-      note.style.height = note.scrollHeight + "px";
-    }, 0);
+    const title = document.createElement("h3");
+    title.contentEditable = true;
+    title.innerText = noteData.title;
+    title.setAttribute("placeholder", "Title");
+    const note = document.createElement("p");
+    note.contentEditable = true;
+    note.innerText = noteData.note;
+    note.setAttribute("placeholder", "Note");
     const buttons_container = document.createElement("div");
     const delete_button = createIconButton("fa-solid fa-trash-can");
     delete_button.dataset.noteButton = "delete";

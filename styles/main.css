@@ -131,18 +131,18 @@ body {
 .note-card {
   background-color: #1a4d2e;
   border-radius: 0.5rem;
-  padding: 0.9rem 0.3rem 0.2rem 1.2rem;
+  padding: 0.9rem 1.4rem 0.2rem 1.2rem;
   min-height: 6rem;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.note-card input {
+.note-card h3 {
   background-color: transparent;
   width: 100%;
+  margin: 0;
   border: none;
-
   outline: none;
   padding: 0.2rem;
   font-size: 1.2rem;
@@ -151,29 +151,35 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.note-card input::placeholder {
+.note-card h3[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
   opacity: 0.8;
-  color: var(--primary-color);
   font-weight: 400;
 }
 
-.note-card textarea {
-  margin-top: 1rem;
+.note-card p {
+  margin: 1rem 0 0.5rem 0;
+  opacity: 1;
+  padding: 0.2rem;
   background-color: transparent;
   resize: none;
   overflow: hidden;
   width: 100%;
   border: none;
   outline: none;
-  font-size: 1rem;
+  font-weight: normal;
+  font-size: 1.1rem;
   color: var(--primary-color);
   font-family: "Inter", sans-serif;
-  height: auto;
 }
 
-.note-card textarea::placeholder {
+.note-card p[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
   opacity: 0.8;
-  color: var(--primary-color);
   font-weight: 300;
 }
 
@@ -240,6 +246,7 @@ body {
 }
 
 .note-card .colors-container input {
+  background-color: transparent;
   margin: 0rem 0.2rem;
   height: 2rem;
   width: 2rem;
@@ -249,24 +256,24 @@ body {
 
 @media (min-width: 576px) {
   html {
-    font-size: 13px;
+    font-size: 14.5px;
   }
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 10px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 992px) {
   html {
-    font-size: 10px;
+    font-size: 13.5px;
   }
 }
 
 @media (min-width: 1200px) {
   html {
-    font-size: 9px;
+    font-size: 13px;
   }
 }
